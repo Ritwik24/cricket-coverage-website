@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e0d1;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 60%;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .profile-icon {
+            position: absolute;
+            top: 10px; 
+            left: 15px; 
+        }
+        .profile-icon img {
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="navbar">
+                    <li class="profile-icon">
+                        <a class="profile-link" href="http://localhost:8080/test/profile.jsp">
+                            <img src="profile-icon.jpg" alt="Profile Icon">
+                        </a>
+                    </li>
+                    <li><a href="http://localhost/search/cricscore.php">HOME</a></li>
+                    <li><a href="http://localhost/search/currmatches.php">MATCHES</a></li>
+                    <li><a href="http://localhost/search/player_search.html">PLAYERS</a></li>
+                    <li><a href="http://localhost/search/ipl.php">IPL</a></li>
+                    <li><a href="http://localhost:8080/test/glossary.html">GLOSSARY</a></li>
+                    <li><a href="http://localhost:8080/test/about.html">ABOUT</a></li>
+                    <li><a href="http://localhost/search/admin.php">ADMIN PORTAL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <h1>Search for a Player</h1>
+    <form action="search_players.php" method="get">
+        <div class="container">
+            <label for="player_name">Player Name:</label>
+            <input type="text" id="player_name" name="player_name" required>
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</body>
+</html>
