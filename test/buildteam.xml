@@ -1,0 +1,90 @@
+<players>
+    <category name="Batsmen">
+        <player>
+            <name>Virat Kohli</name>
+            <team>India</team>
+        </player>
+        <player>
+            <name>Steve Smith</name>
+            <team>Australia</team>
+        </player>
+        <player>
+            <name>Kane Williamson</name>
+            <team>New Zealand</team>
+        </player>
+        <player>
+            <name>Babar Azam</name>
+            <team>Pakistan</team>
+        </player>
+        <player>
+            <name>Rohit Sharma</name>
+            <team>India</team>
+        </player>
+    </category>
+    <category name="Bowlers">
+        <player>
+            <name>Pat Cummins</name>
+            <team>Australia</team>
+        </player>
+        <player>
+            <name>Jasprit Bumrah</name>
+            <team>India</team>
+        </player>
+        <player>
+            <name>Kagiso Rabada</name>
+            <team>South Africa</team>
+        </player>
+        <player>
+            <name>Rashid Khan</name>
+            <team>Afghanistan</team>
+        </player>
+        <player>
+            <name>Trent Boult</name>
+            <team>New Zealand</team>
+        </player>
+    </category>
+    <category name="All-rounders">
+        <player>
+            <name>Ben Stokes</name>
+            <team>England</team>
+        </player>
+        <player>
+            <name>Ravindra Jadeja</name>
+            <team>India</team>
+        </player>
+        <player>
+            <name>Shakib Al Hasan</name>
+            <team>Bangladesh</team>
+        </player>
+        <player>
+            <name>Mitchell Marsh</name>
+            <team>Australia</team>
+        </player>
+        <player>
+            <name>Hardik Pandya</name>
+            <team>India</team>
+        </player>
+    </category>
+    <category name="Wicket-keepers">
+        <player>
+            <name>MS Dhoni</name>
+            <team>India</team>
+        </player>
+        <player>
+            <name>Quinton de Kock</name>
+            <team>South Africa</team>
+        </player>
+        <player>
+            <name>Jos Buttler</name>
+            <team>England</team>
+        </player>
+        <player>
+            <name>KL Rahul</name>
+            <team>India</team>
+        </player>
+        <player>
+            <name>Rishabh Pant</name>
+            <team>India</team>
+        </player>
+    </category>
+</players>

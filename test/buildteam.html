@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Dream Team</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e1cbb8;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #666;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        label {
+            margin-left: 5px;
+            font-size: 16px;
+        }
+
+        #selectedTeam {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Build your Dream Team</h1>
+
+    <form id="teamForm" onsubmit="return validateTeam()">
+        <h2>Batsmen:</h2>
+        <div id="batsmen"></div>
+
+        <h2>Bowlers:</h2>
+        <div id="bowlers"></div>
+
+        <h2>All-rounders:</h2>
+        <div id="allRounders"></div>
+
+        <h2>Wicket-keepers:</h2>
+        <div id="wicketKeepers"></div>
+
+        <br><br>
+        <input type="submit" value="Submit Team">
+    </form>
+
+    <h2>Selected Team:</h2>
+    <div id="selectedTeam"></div>
+
+    <script>
+        // Function to fetch player names from XML and populate the checkboxes
+        function fetchPlayersFromXML() {
+            // Fetch the XML file
+            fetch('buildteam.xml')
+                .then(response => response.text())
+                .then(data => {
+                    // Parse XML data
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+
+                    // Function to create and append checkboxes to a div
+                    function appendCheckboxes(divId, players) {
+                        const divElement = document.getElementById(divId);
+                        players.forEach(player => {
+                            const playerName = player.textContent;
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.name = divId;
+                            checkbox.value = playerName;
+                            checkbox.id = playerName.replace(/\s+/g, ''); // Remove spaces for ID
+
+                            const label = document.createElement('label');
+                            label.setAttribute('for', checkbox.id);
+                            label.textContent = playerName;
+
+                            checkbox.addEventListener('change', updateSelectedTeam);
+
+                            divElement.appendChild(checkbox);
+                            divElement.appendChild(label);
+                            divElement.appendChild(document.createElement('br'));
+                        });
+                    }
+
+                    // Fetch players for each category and append checkboxes to respective divs
+                    const batsmen = xmlDoc.querySelectorAll('category[name="Batsmen"] player name');
+                    appendCheckboxes('batsmen', batsmen);
+
+                    const bowlers = xmlDoc.querySelectorAll('category[name="Bowlers"] player name');
+                    appendCheckboxes('bowlers', bowlers);
+
+                    const allRounders = xmlDoc.querySelectorAll('category[name="All-rounders"] player name');
+                    appendCheckboxes('allRounders', allRounders);
+
+                    const wicketKeepers = xmlDoc.querySelectorAll('category[name="Wicket-keepers"] player name');
+                    appendCheckboxes('wicketKeepers', wicketKeepers);
+                })
+                .catch(error => {
+                    console.error('Error fetching XML:', error);
+                });
+        }
+
+        // Call the function to fetch players when the page loads
+        window.onload = fetchPlayersFromXML;
+
+        // Function to update the selected team as checkboxes are checked
+        function updateSelectedTeam() {
+            const selectedPlayers = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedTeamList = document.getElementById('selectedTeam');
+            selectedTeamList.innerHTML = ''; // Clear existing list
+            checkboxes.forEach(checkbox => {
+                selectedPlayers.push(checkbox.value);
+                const listItem = document.createElement('li');
+                listItem.textContent = checkbox.value;
+                selectedTeamList.appendChild(listItem);
+            });
+        }
+
+        // Function to validate the team selection
+        function validateTeam() {
+            // Validate at least one player selected from each category
+            const batsmenChecked = document.querySelectorAll('#batsmen input[type="checkbox"]:checked').length;
+            const bowlersChecked = document.querySelectorAll('#bowlers input[type="checkbox"]:checked').length;
+            const allRoundersChecked = document.querySelectorAll('#allRounders input[type="checkbox"]:checked').length;
+            const wicketKeepersChecked = document.querySelectorAll('#wicketKeepers input[type="checkbox"]:checked').length;
+            if (batsmenChecked === 0 || bowlersChecked === 0 || allRoundersChecked === 0 || wicketKeepersChecked === 0) {
+                alert('Please select at least one player from each category.');
+                return false;
+            }
+            // Validate total number of players is 11
+            const totalPlayers = batsmenChecked + bowlersChecked + allRoundersChecked + wicketKeepersChecked;
+            if (totalPlayers !== 11) {
+                alert('Please select exactly 11 players for your team.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
